@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Shopify.Views
+namespace Shopify.Views.SingleView
 {
     class Intro : IView
     {
@@ -28,7 +28,7 @@ namespace Shopify.Views
             _frame.RenderBorder();
             RenderLogo();
             LoadingLogo();
-            Thread.Sleep(500);
+            Thread.Sleep(600);
             _frame.ClearFrame();
             return States.Start;
         }

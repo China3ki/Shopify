@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,8 +10,13 @@ namespace Shopify.Components
     class Navigate(string[] menu)
     {
         public int pos { get; set; } = 1;
-        private int _maxPos = menu.Length;
+        private int _maxPos = menu.Length - 1;
         private string[] _menu = menu;
+        /// <summary>
+        /// Odczytuję wciśnięty przycisk
+        /// </summary>
+        /// <param name="font">Kolor czcionki</param>
+        /// <param name="background">Kolor tła</param>
         public void ReadKey(ConsoleColor font, ConsoleColor background)
         {
             ConsoleKey key;
@@ -20,6 +26,12 @@ namespace Shopify.Components
                 ChangePos(key, font, background);
             } while (key != ConsoleKey.Enter);
         }
+        /// <summary>
+        /// Zmienia pozycję
+        /// </summary>
+        /// <param name="key">Kliknięty przycisk</param>
+        /// <param name="font">Kolor czcionki</param>
+        /// <param name="background">Kolor tła</param>
         private void ChangePos(ConsoleKey key, ConsoleColor font, ConsoleColor background)
         {
             switch(key)
@@ -31,20 +43,25 @@ namespace Shopify.Components
                 case ConsoleKey.DownArrow:
                     pos = pos == _maxPos ? _maxPos : pos += 1;
                     ChangeColor(pos - 1, font, background);
+                    Debug.Write(_maxPos);
                     break;
             }
         }
+        /// <summary>
+        /// Zmienia kolor wcześnie i aktualnej wybranej pozycji
+        /// </summary>
+        /// <param name="prevPos">Poprzednia pozycja</param>
+        /// <param name="font">Kolor czcionki</param>
+        /// <param name="background">Kolor tła</param>
         private void ChangeColor(int prevPos, ConsoleColor font, ConsoleColor background)
         {
-            Console.SetCursorPosition(1, prevPos);
+            Console.SetCursorPosition(2, prevPos);
             Console.Write(_menu[prevPos]);
-            Console.SetCursorPosition(1, pos);
+            Console.SetCursorPosition(2, pos);
             Console.ForegroundColor = font;
             Console.BackgroundColor = background;
             Console.Write(_menu[pos]);
             Console.ResetColor();
-
-
         }
     }
 }
