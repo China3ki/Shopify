@@ -9,20 +9,11 @@ using System.Threading.Tasks;
 
 namespace Shopify.Views.SingleView
 {
-    class Error
+    class Error(string[] header) : Single(header), IView
     {
-        private Frame _frame = new Frame();
-        private string[] _errorLogo = [
-            "  _____                     ",
-            " | ____|_ __ _ __ ___  _ __ ",
-            " |  _| | '__| '__/ _ \\| '__|",
-            " | |___| |  | | | (_) | |   ",
-            " |_____|_|  |_|  \\___/|_|   ",
-            "                            "
-            ];
         public States InitView()
         {
-
+            throw new NotImplementedException();
         }
     }
 }

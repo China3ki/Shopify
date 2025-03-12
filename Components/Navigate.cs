@@ -12,27 +12,14 @@ namespace Shopify.Components
         public int pos { get; set; } = 1;
         private int _maxPos = menu.Length - 1;
         private string[] _menu = menu;
-        /// <summary>
-        /// Odczytuję wciśnięty przycisk
-        /// </summary>
-        /// <param name="font">Kolor czcionki</param>
-        /// <param name="background">Kolor tła</param>
-        public void ReadKey(ConsoleColor font, ConsoleColor background)
-        {
-            ConsoleKey key;
-            do
-            {
-                key = Console.ReadKey(true).Key;
-                ChangePos(key, font, background);
-            } while (key != ConsoleKey.Enter);
-        }
+        
         /// <summary>
         /// Zmienia pozycję
         /// </summary>
         /// <param name="key">Kliknięty przycisk</param>
         /// <param name="font">Kolor czcionki</param>
         /// <param name="background">Kolor tła</param>
-        private void ChangePos(ConsoleKey key, ConsoleColor font, ConsoleColor background)
+        public void ChangePos(ConsoleKey key, ConsoleColor font, ConsoleColor background)
         {
             switch(key)
             {

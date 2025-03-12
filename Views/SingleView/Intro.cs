@@ -9,20 +9,9 @@ using System.Threading.Tasks;
 
 namespace Shopify.Views.SingleView
 {
-    class Intro : IView
-    {
-        private Frame _frame = new Frame();
-        private string[] _logo = [
-            "  ____  _                 _  __       ",
-            " / ___|| |__   ___  _ __ (_)/ _|_   _ ",
-            " \\___ \\| '_ \\ / _ \\| '_ \\| | |_| | | |",
-            "  ___) | | | | (_) | |_) | |  _| |_| |",
-            " |____/|_| |_|\\___/| .__/|_|_|  \\__, |",
-            "                   |_|          |___/ "
-            ];
-        /// <summary>
-        /// Wyświetla logo aplikacji
-        /// </summary>
+    class Intro(string[] header) : Single(header), IView
+    { 
+
         public States InitView()
         {
             _frame.RenderBorder();
@@ -32,14 +21,7 @@ namespace Shopify.Views.SingleView
             _frame.ClearFrame();
             return States.Start;
         }
-        private void RenderLogo()
-        {
-            for(int y = 0; y < _logo.Length; y++)
-            {
-                Console.SetCursorPosition((Console.WindowWidth - _logo[y].Length) / 2, Console.WindowHeight / 2 + y - 3);
-                Console.Write(_logo[y]);
-            }
-        }
+       
         /// <summary>
         /// Wyświetla czas ładowania
         /// </summary>

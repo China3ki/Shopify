@@ -17,8 +17,18 @@ namespace Shopify.Views
             _info.InfoMessage("Wybierz jedną z opcji aby kontynować.", ConsoleColor.Yellow, ConsoleColor.Black);
             _info.InfoMessage("Witaj w Shopify!", ConsoleColor.White, ConsoleColor.Black);
             _info.InfoBox();
-            _nav.ReadKey(ConsoleColor.Green, ConsoleColor.Black);
-            return States.Intro;
+            ReadKey(ConsoleColor.Green, ConsoleColor.Black);
+            _frame.ClearFrame();
+            return NextView();
+        }
+        private void ReadKey(ConsoleColor font, ConsoleColor background)
+        {
+            ConsoleKey key;
+            do
+            {
+                key = Console.ReadKey(true).Key;
+                _nav.ChangePos(key, font, background);
+            } while (key != ConsoleKey.Enter);
         }
         protected override States NextView()
         {
