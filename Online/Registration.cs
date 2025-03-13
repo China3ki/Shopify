@@ -10,6 +10,6 @@ namespace Shopify.Online
     {
         public string Nickname { get; set; } = "";
         public string Pswd { get; set; } = "";
-        public string RepeatPswd { get; set; } = "";
+        public string RepeatedPswd { get; set; } = "";
     }
 }

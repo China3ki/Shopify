@@ -35,7 +35,7 @@ namespace Shopify.Components
                     currentMenu = start.InitView();
                     break;
                 case States.Register:
-                    Register register = new Register([" == Rejestracja == ", "Nazwa użytkownika:", "Hasło:", "Powtórzone hasło:", "Zatwierdź", "Powrót"]);
+                    Register register = new Register([" == Rejestracja == ", "Nazwa użytkownika:", "Hasło:", "Powtórzone hasło:", "Pokaż/Schowaj Hasła", "Zatwierdź", "Powrót"]);
                     currentMenu = register.InitView();
                     break;
             }

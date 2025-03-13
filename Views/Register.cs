@@ -18,8 +18,13 @@ namespace Shopify.Views
         {
             _frame.RenderBorder();
             _frame.RenderMenu(_menu, ConsoleColor.Black, ConsoleColor.White);
+            _info.InfoMessage("- Hasło musi mieć przynajmniej 8 znaków, jedną duża literę oraz jeden znak specjalny", ConsoleColor.Yellow, ConsoleColor.Black);
+            _info.InfoMessage("- Nazwa użytkownia musi być unikalna i może mieć maksymalnie 30 znaków", ConsoleColor.Yellow, ConsoleColor.Black);
+            _info.InfoMessage("Wymagania do rejestracji:", ConsoleColor.White, ConsoleColor.Black);
+            _info.InfoBox();
             ReadKey();
-            throw new NotImplementedException();
+            _frame.ClearFrame();
+            return NextView();
         }
         /// <summary>
         /// Odczytuję wciśnięty przycisk
@@ -32,15 +37,51 @@ namespace Shopify.Views
             do
             {
                 key = Console.ReadKey(true).Key;
-                if ((_nav.pos == 3 && key == ConsoleKey.DownArrow) || (_nav.pos == 5 && key == ConsoleKey.UpArrow)) _nav.ChangePos(key, ConsoleColor.Green, ConsoleColor.Black);
-                else if((_nav.pos == 4 || _nav.pos == 5) && key == ConsoleKey.DownArrow) _nav.ChangePos(key, ConsoleColor.Red, ConsoleColor.Black);
+                if ((_nav.pos == 3 && key == ConsoleKey.DownArrow) || (_nav.pos == 5 && key == ConsoleKey.UpArrow)) _nav.ChangePos(key, ConsoleColor.DarkYellow, ConsoleColor.Black);
+                else if ((_nav.pos == 4 && key == ConsoleKey.DownArrow) || (_nav.pos == 6 && key == ConsoleKey.UpArrow)) _nav.ChangePos(key, ConsoleColor.Green, ConsoleColor.Black);
+                else if ((_nav.pos == 5 || _nav.pos == 6) && key == ConsoleKey.DownArrow) _nav.ChangePos(key, ConsoleColor.Red, ConsoleColor.Black);
                 else _nav.ChangePos(key, ConsoleColor.Black, ConsoleColor.White);
             } while (key != ConsoleKey.Enter);
-            _form.InitForm(_nav.pos, _menu[_nav.pos].Length, _registration.Nickname);
+
+            if (_nav.pos >= 1 && _nav.pos <= 4) SelectTheInput();
+        }
+        /// <summary>
+        /// Wybiera odpowiedni input
+        /// </summary>
+        private void SelectTheInput()
+        {
+            switch(_nav.pos)
+            {
+                case 1:
+                    _registration.Nickname = _form.InitForm(_nav.pos, _menu[_nav.pos].Length, _registration.Nickname, false);
+                    ReadKey();
+                    break;
+                case 2:
+                    _registration.Pswd = _form.InitForm(_nav.pos, _menu[_nav.pos].Length, _registration.Pswd, true);
+                    ReadKey();
+                    break;
+                case 3:
+                   _registration.RepeatedPswd = _form.InitForm(_nav.pos, _menu[_nav.pos].Length, _registration.RepeatedPswd, true);
+                    ReadKey();
+                    break;
+                case 4:
+                    if (_form._hidePswd) _form.ShowPswd(_registration.Pswd, _registration.RepeatedPswd);
+                    else _form.HidePswd(_registration.Pswd.Length, _registration.RepeatedPswd.Length);
+                        ReadKey();
+                    break;
+            }
         }
         protected override States NextView()
         {
-            throw new NotImplementedException();
+            switch(_nav.pos)
+            {
+                case 5:
+                    return States.Start;
+                case 6:
+                    return States.Start;
+                default:
+                    throw new NotImplementedException();
+            }
         }
     }
 }
