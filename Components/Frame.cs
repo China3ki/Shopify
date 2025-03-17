@@ -27,6 +27,10 @@ namespace Shopify.Components
 
                 }
             }
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.SetCursorPosition((Console.WindowWidth - 9) / 2, 0);
+            Console.Write(" Shopify ");
+            Console.ResetColor();
         }
         /// <summary>
         /// Renderuje Menu
@@ -48,10 +52,6 @@ namespace Shopify.Components
                 Console.Write(menu[i]);
                 Console.ResetColor();
             }
-            Console.ForegroundColor = ConsoleColor.Blue;
-            Console.SetCursorPosition((Console.WindowWidth - 9) / 2, 0);
-            Console.Write(" Shopify ");
-            Console.ResetColor();
         }
         /// <summary>
         /// Czyści całe okno

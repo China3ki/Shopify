@@ -37,5 +37,21 @@ namespace Shopify.Components
                 else Console.Write('═');
             }
         }
+        /// <summary>
+        /// Czyści messageBox
+        /// </summary>
+        public void ClearInfoBox()
+        {
+            for(int x = 0; x < Console.WindowWidth; x++)
+            {
+                for(int y = 0; y < _countInfo - 2; y++)
+                {
+                    Console.SetCursorPosition(x, Console.WindowHeight - 2 - y);
+                    if (x == 0 || x == Console.WindowWidth - 1) Console.Write('║');
+                    else Console.Write('═');
+                }
+            }
+            _countInfo = 0;
+        }
     }
 }

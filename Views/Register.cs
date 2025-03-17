@@ -13,6 +13,7 @@ namespace Shopify.Views
     class Register(string[] menu) : View(menu), IView
     {
         private Registration _registration = new Registration();
+        private Validation _validation = new Validation();
         private Form _form = new Form();
         public States InitView()
         {
@@ -43,7 +44,7 @@ namespace Shopify.Views
                 else _nav.ChangePos(key, ConsoleColor.Black, ConsoleColor.White);
             } while (key != ConsoleKey.Enter);
 
-            if (_nav.pos >= 1 && _nav.pos <= 4) SelectTheInput();
+            if (_nav.pos >= 1 && _nav.pos <= 5) SelectTheInput();
         }
         /// <summary>
         /// Wybiera odpowiedni input
@@ -68,6 +69,18 @@ namespace Shopify.Views
                     if (_form._hidePswd) _form.ShowPswd(_registration.Pswd, _registration.RepeatedPswd);
                     else _form.HidePswd(_registration.Pswd.Length, _registration.RepeatedPswd.Length);
                         ReadKey();
+                    break;
+                case 5:
+                    if(!_validation.InitValidation(_registration.Nickname, _registration.Pswd, _registration.RepeatedPswd))
+                    {
+                        _info.ClearInfoBox();
+                        foreach(string message in _validation.messages)
+                        {
+                            _info.InfoMessage(message, ConsoleColor.Red, ConsoleColor.Black);
+                        }
+                        _info.InfoBox();
+                        ReadKey();
+                    }
                     break;
             }
         }
