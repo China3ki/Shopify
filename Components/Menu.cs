@@ -12,6 +12,7 @@ namespace Shopify.Components
     class Menu
     {
         public States currentMenu { get; set; } = States.Intro;
+
         /// <summary>
         /// Zmienia aktualne menu na kolejne
         /// </summary>
@@ -37,6 +38,17 @@ namespace Shopify.Components
                 case States.Register:
                     Register register = new Register([" == Rejestracja == ", "Nazwa użytkownika:", "Hasło:", "Powtórzone hasło:", "Pokaż/Schowaj Hasła", "Zatwierdź", "Powrót"]);
                     currentMenu = register.InitView();
+                    break;
+                case States.Complete:
+                    CompleteRegistration complete = new CompleteRegistration([
+                " __        ___ _                        _ ",
+                " \\ \\      / (_) |_ __ _ _ __ ___  _   _| |",
+                "  \\ \\ /\\ / /| | __/ _` | '_ ` _ \\| | | | |",
+                "   \\ V  V / | | || (_| | | | | | | |_| |_|",
+                "    \\_/\\_/  |_|\\__\\__,_|_| |_| |_|\\__, (_)",
+                "                                  |___/   "
+                ]);
+                    complete.InitView();
                     break;
             }
         }

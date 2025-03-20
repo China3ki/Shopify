@@ -6,6 +6,7 @@
         Start,
         Login,
         Register,
+        Complete,
         Main,
         Outro,
         Exit

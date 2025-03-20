@@ -30,7 +30,6 @@ namespace Shopify.Components
                 case ConsoleKey.DownArrow:
                     pos = pos == _maxPos ? _maxPos : pos += 1;
                     ChangeColor(pos - 1, font, background);
-                    Debug.Write(_maxPos);
                     break;
             }
         }

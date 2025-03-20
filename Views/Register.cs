@@ -4,6 +4,7 @@ using Shopify.Interfaces;
 using Shopify.Online;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -78,10 +79,14 @@ namespace Shopify.Views
                         {
                             _info.InfoMessage(message, ConsoleColor.Red, ConsoleColor.Black);
                         }
+                        _validation.messages.Clear();
                         _info.InfoBox();
                         ReadKey();
+                    } else
+                    {
+                        _registration.InsertData();
                     }
-                    break;
+                        break;
             }
         }
         protected override States NextView()
@@ -89,7 +94,7 @@ namespace Shopify.Views
             switch(_nav.pos)
             {
                 case 5:
-                    return States.Start;
+                    return States.Complete;
                 case 6:
                     return States.Start;
                 default:

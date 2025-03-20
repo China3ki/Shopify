@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +18,7 @@ namespace Shopify.Components
         /// <param name="background">Kolor tła</param>
         public void InfoMessage(string message, ConsoleColor font, ConsoleColor background)
         {
+            Debug.WriteLine(_countInfo);
             Console.SetCursorPosition(2, Console.WindowHeight - 2 - _countInfo);
             Console.ForegroundColor = font;
             Console.BackgroundColor = background;
@@ -44,11 +46,11 @@ namespace Shopify.Components
         {
             for(int x = 0; x < Console.WindowWidth; x++)
             {
-                for(int y = 0; y < _countInfo - 2; y++)
+                for(int y = 0; y < _countInfo + 1; y++)
                 {
                     Console.SetCursorPosition(x, Console.WindowHeight - 2 - y);
                     if (x == 0 || x == Console.WindowWidth - 1) Console.Write('║');
-                    else Console.Write('═');
+                    else Console.Write(' ');
                 }
             }
             _countInfo = 0;
