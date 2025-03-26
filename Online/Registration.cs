@@ -29,11 +29,7 @@ namespace Shopify.Online
         }
         private string HashPassword()
         {
-            byte[] salt = new byte[16];
-            using (var rng = RandomNumberGenerator.Create())
-            {
-                rng.GetBytes(salt);
-            }
+            byte[] salt = [244, 2, 87, 13, 44, 84, 21, 210, 65, 1, 62, 14, 36, 149, 203, 11];
 
             // Haszowanie hasła przy użyciu PBKDF2
             using (var pbkdf2 = new Rfc2898DeriveBytes(Pswd, salt, 100000, HashAlgorithmName.SHA256))

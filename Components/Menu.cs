@@ -36,11 +36,11 @@ namespace Shopify.Components
                     currentMenu = start.InitView();
                     break;
                 case States.Register:
-                    Register register = new Register([" == Rejestracja == ", "Nazwa użytkownika:", "Hasło:", "Powtórzone hasło:", "Pokaż/Schowaj Hasła", "Zatwierdź", "Powrót"]);
+                    Register register = new Register([" == Rejestracja == ", "Nazwa użytkownika:", "Hasło:", "Powtórzone hasło:", "Pokaż/Schowaj hasła", "Zarejestruj się", "Powrót"]);
                     currentMenu = register.InitView();
                     break;
-                case States.Complete:
-                    CompleteRegistration complete = new CompleteRegistration([
+                case States.CompleteReg:
+                    CompleteRegistration completeReg = new CompleteRegistration([
                 " __        ___ _                        _ ",
                 " \\ \\      / (_) |_ __ _ _ __ ___  _   _| |",
                 "  \\ \\ /\\ / /| | __/ _` | '_ ` _ \\| | | | |",
@@ -48,7 +48,22 @@ namespace Shopify.Components
                 "    \\_/\\_/  |_|\\__\\__,_|_| |_| |_|\\__, (_)",
                 "                                  |___/   "
                 ]);
-                    complete.InitView();
+                    currentMenu = completeReg.InitView();
+                    break;
+                case States.Login:
+                    Login login = new Login([" == Login == ", "Nazwa użytkownika:", "Hasło:", "Pokaż/Schowaj hasło", "Zaloguj się", "Powrót"]);
+                    currentMenu = login.InitView();
+                    break;
+                case States.CompleteSig:
+                    CompleteSignIn completeSig = new CompleteSignIn([
+                        "  _____     _                                            ",
+                        " |__  /__ _| | ___   __ _  _____      ____ _ _ __   ___  ",
+                        "   / // _` | |/ _ \\ / _` |/ _ \\ \\ /\\ / / _` | '_ \\ / _ \\ ",
+                        "  / /| (_| | | (_) | (_| | (_) \\ V  V / (_| | | | | (_) |",
+                        " /____\\__,_|_|\\___/ \\__, |\\___/ \\_/\\_/ \\__,_|_| |_|\\___/ ",
+                        "                    |___/                                "
+                        ]);
+                    //completeSig.InitUser(); // do zrobienia
                     break;
             }
         }

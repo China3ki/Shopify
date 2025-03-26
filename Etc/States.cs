@@ -5,8 +5,9 @@
         Intro,
         Start,
         Login,
+        CompleteSig,
         Register,
-        Complete,
+        CompleteReg,
         Main,
         Outro,
         Exit

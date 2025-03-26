@@ -13,9 +13,9 @@ namespace Shopify.Views
 {
     class Register(string[] menu) : View(menu), IView
     {
-        private Registration _registration = new Registration();
-        private Validation _validation = new Validation();
-        private Form _form = new Form();
+        private readonly Registration _registration = new Registration();
+        private readonly Validation _validation = new Validation();
+        private readonly Form _form = new Form();
         public States InitView()
         {
             _frame.RenderBorder();
@@ -33,7 +33,7 @@ namespace Shopify.Views
         /// </summary>
         /// <param name="font">Kolor czcionki</param>
         /// <param name="background">Kolor tła</param>
-        private void ReadKey()
+        protected override void ReadKey()
         {
             ConsoleKey key;
             do
@@ -94,7 +94,7 @@ namespace Shopify.Views
             switch(_nav.pos)
             {
                 case 5:
-                    return States.Complete;
+                    return States.CompleteReg;
                 case 6:
                     return States.Start;
                 default:

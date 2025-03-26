@@ -10,10 +10,11 @@ namespace Shopify.Views
 {
     abstract class View(string[] menu)
     {
-        protected Navigate _nav = new Navigate(menu);
-        protected Frame _frame = new Frame();
-        protected Info _info = new Info();
+        protected readonly Navigate _nav = new Navigate(menu);
+        protected readonly Frame _frame = new Frame();
+        protected readonly Info _info = new Info();
         protected string[] _menu = menu;
         abstract protected States NextView();
+        abstract protected void ReadKey();
     }
 }

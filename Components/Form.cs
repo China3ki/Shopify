@@ -29,6 +29,12 @@ namespace Shopify.Components
             Console.Write(repeatedPswd);
             _hidePswd = false;
         }
+        public void ShowPswd(string pswd)
+        {
+            Console.SetCursorPosition(8, 2);
+            Console.Write(pswd);
+            _hidePswd = false;
+        }
         /// <summary>
         /// Ukrywa hasła w inputach
         /// </summary>
@@ -44,6 +50,15 @@ namespace Shopify.Components
             for(int i = 0; i < lenOfReaptedPswd; i++)
             {
                 Console.SetCursorPosition(19 + i, 3);
+                Console.Write('*');
+            }
+            _hidePswd = true;
+        }
+        public void HidePswd(int lenOfPswd)
+        {
+            for (int i = 0; i < lenOfPswd; i++)
+            {
+                Console.SetCursorPosition(8 + i, 2);
                 Console.Write('*');
             }
             _hidePswd = true;

@@ -12,22 +12,23 @@ namespace Shopify.Views
     {
         public States InitView()
         {
+            _frame.ClearFrame();
             _frame.RenderBorder();
             _frame.RenderMenu(_menu, ConsoleColor.Green, ConsoleColor.Black);
             _info.InfoMessage("Wybierz jedną z opcji aby kontynować.", ConsoleColor.Yellow, ConsoleColor.Black);
             _info.InfoMessage("Witaj w Shopify!", ConsoleColor.White, ConsoleColor.Black);
             _info.InfoBox();
-            ReadKey(ConsoleColor.Green, ConsoleColor.Black);
+            ReadKey();
             _frame.ClearFrame();
             return NextView();
         }
-        private void ReadKey(ConsoleColor font, ConsoleColor background)
+        protected override void ReadKey()
         {
             ConsoleKey key;
             do
             {
                 key = Console.ReadKey(true).Key;
-                _nav.ChangePos(key, font, background);
+                _nav.ChangePos(key, ConsoleColor.Green, ConsoleColor.Black);
             } while (key != ConsoleKey.Enter);
         }
         protected override States NextView()

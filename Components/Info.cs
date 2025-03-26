@@ -18,7 +18,6 @@ namespace Shopify.Components
         /// <param name="background">Kolor tła</param>
         public void InfoMessage(string message, ConsoleColor font, ConsoleColor background)
         {
-            Debug.WriteLine(_countInfo);
             Console.SetCursorPosition(2, Console.WindowHeight - 2 - _countInfo);
             Console.ForegroundColor = font;
             Console.BackgroundColor = background;

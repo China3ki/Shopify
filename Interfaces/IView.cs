@@ -13,6 +13,6 @@ namespace Shopify.Interfaces
         /// Służy do inicjacji widoku
         /// </summary>
         /// <returns>Następny widok</returns>
-        public States InitView(); 
+        public States InitView();
     }
 }

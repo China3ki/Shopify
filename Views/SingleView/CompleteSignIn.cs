@@ -3,26 +3,23 @@ using Shopify.Etc;
 using Shopify.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Shopify.Views.SingleView
 {
-    class CompleteRegistration(string[] header) : Single(header), IView
+    class CompleteSignIn(string[] header) : Single(header)
     {
-        Info _info = new Info();
-        public States InitView()
+        private Info _info = new Info();
+        public States InitUser(string nickname)
         {
             _frame.ClearFrame();
             _frame.RenderBorder();
-            RenderLogo();
-            _info.InfoMessage("Kliknij Enter aby kontynuować.", ConsoleColor.White, ConsoleColor.Black);
-            _info.InfoMessage("Udało ci się zarejestrować!", ConsoleColor.Green, ConsoleColor.Black);
+            _info.InfoMessage("Kliknij Enter aby kontunować.", ConsoleColor.Yellow, ConsoleColor.Black);
+            _info.InfoMessage($"Witaj {nickname}!", ConsoleColor.White, ConsoleColor.Black);
             _info.InfoBox();
             WaitForEnter();
-            Debug.Write("abc");
             return States.Start;
         }
         private void WaitForEnter()

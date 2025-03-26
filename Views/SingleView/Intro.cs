@@ -18,7 +18,6 @@ namespace Shopify.Views.SingleView
             RenderLogo();
             LoadingLogo();
             Thread.Sleep(600);
-            _frame.ClearFrame();
             return States.Start;
         }
        
