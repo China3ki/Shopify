@@ -2,6 +2,7 @@
 using Shopify.Etc;
 using Shopify.Interfaces;
 using Shopify.Online;
+using Shopify.Views.SingleView;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -23,7 +24,7 @@ namespace Shopify.Views
             _info.InfoMessage("Uzupełnij dane aby się zalogować.", ConsoleColor.Yellow, ConsoleColor.Black);
             _info.InfoBox();
             ReadKey();
-            return States.Start; /// lol
+            return NextView();
 
         }
         protected override void ReadKey()
@@ -73,7 +74,7 @@ namespace Shopify.Views
                                     ReadKey();
                                 } else
                                 {
-                                    Debug.Write("zrob");
+                                    Nick = _login.Nickname;
                                 }
                             }
                             break;
@@ -81,7 +82,16 @@ namespace Shopify.Views
         }
         protected override States NextView()
         {
-            throw new NotImplementedException();
+            switch(_nav.pos)
+            {
+                case 4:
+                    return States.CompleteSig;
+                case 5:
+                    return States.Start;
+                default:
+                    _error.InitView();
+                    return States.Exit;
+            }
         }
     }
 }

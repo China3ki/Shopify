@@ -9,18 +9,22 @@ using System.Threading.Tasks;
 
 namespace Shopify.Views.SingleView
 {
-    class CompleteSignIn(string[] header) : Single(header)
+    class CompleteSignIn(string[] header) : Single(header), IView
     {
         private Info _info = new Info();
-        public States InitUser(string nickname)
+        public States InitView()
         {
             _frame.ClearFrame();
             _frame.RenderBorder();
+            RenderLogo();
             _info.InfoMessage("Kliknij Enter aby kontunować.", ConsoleColor.Yellow, ConsoleColor.Black);
-            _info.InfoMessage($"Witaj {nickname}!", ConsoleColor.White, ConsoleColor.Black);
+            _info.InfoMessage($"Witaj ", ConsoleColor.White, ConsoleColor.Black);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write($"{View.Nick}!");
+            Console.ResetColor();
             _info.InfoBox();
             WaitForEnter();
-            return States.Start;
+            return States.Main;
         }
         private void WaitForEnter()
         {

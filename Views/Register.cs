@@ -98,7 +98,8 @@ namespace Shopify.Views
                 case 6:
                     return States.Start;
                 default:
-                    throw new NotImplementedException();
+                    _error.InitView();
+                    return States.Exit;
             }
         }
     }

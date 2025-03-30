@@ -22,7 +22,6 @@ namespace Shopify.Views.SingleView
             _info.InfoMessage("Udało ci się zarejestrować!", ConsoleColor.Green, ConsoleColor.Black);
             _info.InfoBox();
             WaitForEnter();
-            Debug.Write("abc");
             return States.Start;
         }
         private void WaitForEnter()

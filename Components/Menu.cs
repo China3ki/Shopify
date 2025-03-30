@@ -12,7 +12,6 @@ namespace Shopify.Components
     class Menu
     {
         public States currentMenu { get; set; } = States.Intro;
-
         /// <summary>
         /// Zmienia aktualne menu na kolejne
         /// </summary>
@@ -63,7 +62,11 @@ namespace Shopify.Components
                         " /____\\__,_|_|\\___/ \\__, |\\___/ \\_/\\_/ \\__,_|_| |_|\\___/ ",
                         "                    |___/                                "
                         ]);
-                    //completeSig.InitUser(); // do zrobienia
+                    currentMenu = completeSig.InitView();
+                    break;
+                case States.Main:
+                    Main main = new Main([" == Panel główny == ", "Pokaż listę produktów", "Pokaż koszyk", "Twoje zamówienia", "Zmień dane do dostawy", "Wyloguj", "Wyjdź"]);
+                    currentMenu = main.InitView();
                     break;
             }
         }

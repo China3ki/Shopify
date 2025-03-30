@@ -1,25 +1,26 @@
-﻿using Shopify.Etc;
-using Shopify.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Shopify.Etc;
+using Shopify.Interfaces;
 namespace Shopify.Views
 {
-    class Start(string[] menu) : View(menu), IView
+    class Main(string[] menu) : View(menu), IView
     {
         public States InitView()
         {
             _frame.ClearFrame();
             _frame.RenderBorder();
             _frame.RenderMenu(_menu, ConsoleColor.Green, ConsoleColor.Black);
-            _info.InfoMessage("Wybierz jedną z opcji aby kontynować.", ConsoleColor.Yellow, ConsoleColor.Black);
-            _info.InfoMessage("Witaj w Shopify!", ConsoleColor.White, ConsoleColor.Black);
+            _info.InfoMessage("Zapraszamy do obejrzenia oraz zakupu naszych produktów!", ConsoleColor.Yellow, ConsoleColor.Black);
+            _info.InfoMessage("Witaj ", ConsoleColor.White, ConsoleColor.Black);
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.Write($"{View.Nick}");
+            Console.ResetColor();
             _info.InfoBox();
             ReadKey();
-            _frame.ClearFrame();
             return NextView();
         }
         protected override void ReadKey()
@@ -36,11 +37,7 @@ namespace Shopify.Views
             switch(_nav.pos)
             {
                 case 1:
-                    return States.Login;
-                case 2:
-                    return States.Register;
-                case 3:
-                    return States.Exit;
+                    return States.Main;
                 default:
                     _error.InitView();
                     return States.Exit;

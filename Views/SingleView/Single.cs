@@ -10,7 +10,7 @@ namespace Shopify.Views.SingleView
 {
     class Single(string[] header) 
     {
-        protected Frame _frame = new Frame();
+        protected readonly Frame _frame = new Frame();
         protected string[] _header = header;
         /// <summary>
         /// Wyświetla logo aplikacji
