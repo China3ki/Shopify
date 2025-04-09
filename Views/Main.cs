@@ -7,7 +7,7 @@ using Shopify.Etc;
 using Shopify.Interfaces;
 namespace Shopify.Views
 {
-    class Main(string[] menu) : View(menu), IView
+    class Main(List<string> menu) : View(menu), IView
     {
         public States InitView()
         {
@@ -17,7 +17,7 @@ namespace Shopify.Views
             _info.InfoMessage("Zapraszamy do obejrzenia oraz zakupu naszych produktów!", ConsoleColor.Yellow, ConsoleColor.Black);
             _info.InfoMessage("Witaj ", ConsoleColor.White, ConsoleColor.Black);
             Console.ForegroundColor = ConsoleColor.Cyan;
-            Console.Write($"{View.Nick}");
+            Console.Write($"{View.Nick}!");
             Console.ResetColor();
             _info.InfoBox();
             ReadKey();
@@ -34,10 +34,10 @@ namespace Shopify.Views
         }
         protected override States NextView()
         {
-            switch(_nav.pos)
+            switch(_nav.Pos)
             {
                 case 1:
-                    return States.Main;
+                    return States.Categories;
                 default:
                     _error.InitView();
                     return States.Exit;

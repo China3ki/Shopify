@@ -9,6 +9,8 @@
         Register,
         CompleteReg,
         Main,
+        Categories,
+        ProductsList,
         Outro,
         Exit
     };

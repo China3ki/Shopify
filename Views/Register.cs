@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Shopify.Views
 {
-    class Register(string[] menu) : View(menu), IView
+    class Register(List<string> menu) : View(menu), IView
     {
         private readonly Registration _registration = new Registration();
         private readonly Validation _validation = new Validation();
@@ -39,31 +39,31 @@ namespace Shopify.Views
             do
             {
                 key = Console.ReadKey(true).Key;
-                if ((_nav.pos == 3 && key == ConsoleKey.DownArrow) || (_nav.pos == 5 && key == ConsoleKey.UpArrow)) _nav.ChangePos(key, ConsoleColor.DarkYellow, ConsoleColor.Black);
-                else if ((_nav.pos == 4 && key == ConsoleKey.DownArrow) || (_nav.pos == 6 && key == ConsoleKey.UpArrow)) _nav.ChangePos(key, ConsoleColor.Green, ConsoleColor.Black);
-                else if ((_nav.pos == 5 || _nav.pos == 6) && key == ConsoleKey.DownArrow) _nav.ChangePos(key, ConsoleColor.Red, ConsoleColor.Black);
+                if ((_nav.Pos == 3 && key == ConsoleKey.DownArrow) || (_nav.Pos == 5 && key == ConsoleKey.UpArrow)) _nav.ChangePos(key, ConsoleColor.DarkYellow, ConsoleColor.Black);
+                else if ((_nav.Pos == 4 && key == ConsoleKey.DownArrow) || (_nav.Pos == 6 && key == ConsoleKey.UpArrow)) _nav.ChangePos(key, ConsoleColor.Green, ConsoleColor.Black);
+                else if ((_nav.Pos == 5 || _nav.Pos == 6) && key == ConsoleKey.DownArrow) _nav.ChangePos(key, ConsoleColor.Red, ConsoleColor.Black);
                 else _nav.ChangePos(key, ConsoleColor.Black, ConsoleColor.White);
             } while (key != ConsoleKey.Enter);
 
-            if (_nav.pos >= 1 && _nav.pos <= 5) SelectTheInput();
+            if (_nav.Pos >= 1 && _nav.Pos <= 5) SelectTheInput();
         }
         /// <summary>
         /// Wybiera odpowiedni input
         /// </summary>
         private void SelectTheInput()
         {
-            switch(_nav.pos)
+            switch(_nav.Pos)
             {
                 case 1:
-                    _registration.Nickname = _form.InitForm(_nav.pos, _menu[_nav.pos].Length, _registration.Nickname, false);
+                    _registration.Nickname = _form.InitForm(_nav.Pos, _menu[_nav.Pos].Length, _registration.Nickname, false);
                     ReadKey();
                     break;
                 case 2:
-                    _registration.Pswd = _form.InitForm(_nav.pos, _menu[_nav.pos].Length, _registration.Pswd, true);
+                    _registration.Pswd = _form.InitForm(_nav.Pos, _menu[_nav.Pos].Length, _registration.Pswd, true);
                     ReadKey();
                     break;
                 case 3:
-                   _registration.RepeatedPswd = _form.InitForm(_nav.pos, _menu[_nav.pos].Length, _registration.RepeatedPswd, true);
+                   _registration.RepeatedPswd = _form.InitForm(_nav.Pos, _menu[_nav.Pos].Length, _registration.RepeatedPswd, true);
                     ReadKey();
                     break;
                 case 4:
@@ -91,7 +91,7 @@ namespace Shopify.Views
         }
         protected override States NextView()
         {
-            switch(_nav.pos)
+            switch(_nav.Pos)
             {
                 case 5:
                     return States.CompleteReg;

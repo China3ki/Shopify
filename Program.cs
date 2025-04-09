@@ -1,4 +1,6 @@
-﻿namespace Shopify
+﻿using Shopify.Components;
+
+namespace Shopify
 {
     internal class Program
     {

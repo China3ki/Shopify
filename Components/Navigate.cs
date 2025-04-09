@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Shopify.Components
 {
-    class Navigate(string[] menu)
+    class Navigate(List<String> menu)
     {
-        public int pos { get; set; } = 1;
-        private int _maxPos = menu.Length - 1;
-        private string[] _menu = menu;
+        public int Pos { get; set; } = 1;
+        public int MaxPos = menu.Count - 1;
+        private List<String> _menu = menu;
         
         /// <summary>
         /// Zmienia pozycję
@@ -24,12 +24,12 @@ namespace Shopify.Components
             switch(key)
             {
                 case ConsoleKey.UpArrow:
-                    pos = pos == 1 ? 1 : pos -= 1;
-                    ChangeColor(pos + 1, font, background);
+                    Pos = Pos == 1 ? 1 : Pos -= 1;
+                    ChangeColor(Pos + 1, font, background);
                     break;
                 case ConsoleKey.DownArrow:
-                    pos = pos == _maxPos ? _maxPos : pos += 1;
-                    ChangeColor(pos - 1, font, background);
+                    Pos = Pos == MaxPos ? MaxPos : Pos += 1;
+                    ChangeColor(Pos - 1, font, background);
                     break;
             }
         }
@@ -43,10 +43,10 @@ namespace Shopify.Components
         {
             Console.SetCursorPosition(2, prevPos);
             Console.Write(_menu[prevPos]);
-            Console.SetCursorPosition(2, pos);
+            Console.SetCursorPosition(2, Pos);
             Console.ForegroundColor = font;
             Console.BackgroundColor = background;
-            Console.Write(_menu[pos]);
+            Console.Write(_menu[Pos]);
             Console.ResetColor();
         }
     }

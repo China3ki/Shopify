@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Shopify.Views
 {
-    class Start(string[] menu) : View(menu), IView
+    class Start(List<string> menu) : View(menu), IView
     {
         public States InitView()
         {
@@ -33,7 +33,7 @@ namespace Shopify.Views
         }
         protected override States NextView()
         {
-            switch(_nav.pos)
+            switch(_nav.Pos)
             {
                 case 1:
                     return States.Login;

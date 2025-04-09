@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Shopify.Views
 {
-    class Login(string[] menu) : View(menu), IView
+    class Login(List<string> menu) : View(menu), IView
     {
         private readonly Form _form = new Form();
         private readonly SignIn _login = new SignIn();
@@ -33,23 +33,23 @@ namespace Shopify.Views
             do
             {
                 key = Console.ReadKey(true).Key;
-                if ((_nav.pos == 2 && key == ConsoleKey.DownArrow) || (_nav.pos == 4 && key == ConsoleKey.UpArrow)) _nav.ChangePos(key, ConsoleColor.DarkYellow, ConsoleColor.Black);
-                else if ((_nav.pos == 3 && key == ConsoleKey.DownArrow) || (_nav.pos == 5 && key == ConsoleKey.UpArrow)) _nav.ChangePos(key, ConsoleColor.Green, ConsoleColor.Black);
-                else if ((_nav.pos == 4 || _nav.pos == 5) && key == ConsoleKey.DownArrow) _nav.ChangePos(key, ConsoleColor.Red, ConsoleColor.Black);
+                if ((_nav.Pos == 2 && key == ConsoleKey.DownArrow) || (_nav.Pos == 4 && key == ConsoleKey.UpArrow)) _nav.ChangePos(key, ConsoleColor.DarkYellow, ConsoleColor.Black);
+                else if ((_nav.Pos == 3 && key == ConsoleKey.DownArrow) || (_nav.Pos == 5 && key == ConsoleKey.UpArrow)) _nav.ChangePos(key, ConsoleColor.Green, ConsoleColor.Black);
+                else if ((_nav.Pos == 4 || _nav.Pos == 5) && key == ConsoleKey.DownArrow) _nav.ChangePos(key, ConsoleColor.Red, ConsoleColor.Black);
                 else _nav.ChangePos(key, ConsoleColor.Black, ConsoleColor.White);
             } while (key != ConsoleKey.Enter);
-            if (_nav.pos >= 1 && _nav.pos <= 4) SelectTheInput();
+            if (_nav.Pos >= 1 && _nav.Pos <= 4) SelectTheInput();
         }
         private void SelectTheInput()
         {
-            switch(_nav.pos)
+            switch(_nav.Pos)
             {
                 case 1:
-                    _login.Nickname = _form.InitForm(_nav.pos, _menu[_nav.pos].Length, _login.Nickname, false);
+                    _login.Nickname = _form.InitForm(_nav.Pos, _menu[_nav.Pos].Length, _login.Nickname, false);
                     ReadKey();
                     break;
                 case 2:
-                    _login.Pswd = _form.InitForm(_nav.pos, _menu[_nav.pos].Length, _login.Pswd, true);
+                    _login.Pswd = _form.InitForm(_nav.Pos, _menu[_nav.Pos].Length, _login.Pswd, true);
                     ReadKey();
                     break;
                 case 3:
@@ -82,7 +82,7 @@ namespace Shopify.Views
         }
         protected override States NextView()
         {
-            switch(_nav.pos)
+            switch(_nav.Pos)
             {
                 case 4:
                     return States.CompleteSig;

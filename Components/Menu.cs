@@ -68,6 +68,15 @@ namespace Shopify.Components
                     Main main = new Main([" == Panel główny == ", "Pokaż listę produktów", "Pokaż koszyk", "Twoje zamówienia", "Zmień dane do dostawy", "Wyloguj", "Wyjdź"]);
                     currentMenu = main.InitView();
                     break;
+                case States.Categories:
+                    Categories categories = new Categories([" == Kategorie == "]);
+                    currentMenu = categories.InitView();
+                    break;
+                case States.ProductsList:
+                    ProductsList productsList = new ProductsList([$" == {Categories.SelectedCategory} == "], Categories.SelectedCategory);
+                    currentMenu = productsList.InitView();
+                    break;
+
             }
         }
     }
