@@ -1,5 +1,4 @@
-﻿using Shopify.Components;
-
+﻿using Shopify.Views;
 namespace Shopify
 {
     internal class Program
@@ -7,7 +6,9 @@ namespace Shopify
         static void Main(string[] args)
         {
             Console.CursorVisible = false;
-            Shopify shopify = new Shopify();
+            //Shopify shopify = new Shopify();
+            ProductsList p = new ProductsList(["aa"], "Smartfony");
+            p.InitView();
         }
     }
 }
