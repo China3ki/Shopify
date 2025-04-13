@@ -1,6 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using Shopify.Components;
-using Shopify.Components.Sorting;
+using Shopify.Components.Sorting.ListType;
 using Shopify.Components.Tables;
 using Shopify.Etc;
 using Shopify.Interfaces;
@@ -14,7 +14,7 @@ namespace Shopify.Views
 {
     class ProductsList(List<string> menu, string category) : View(menu), IView
     {
-        private readonly TableControl _control = new(new Table(ConsoleColor.Yellow, " Lp ", "Nazwa produktu", "Dostępna ilość", "Cena (PLN)"), new TableNavigate(), new SortProducts());
+        private readonly TableControl _control = new(new Table(ConsoleColor.Yellow, " Lp ", "Nazwa produktu", "Dostępna ilość", "Cena (PLN)"), new TableNavigate(), new Sort<ISort>());
         private readonly string _category = category;
         public States InitView()
         {
@@ -42,8 +42,10 @@ namespace Shopify.Views
                     string name = data.GetString("product_name");
                     int amount = data.GetInt32("product_amount");
                     decimal price = data.GetDecimal("product_price");
-                    _control.AddToList(lp, name, amount, price);
+
+                    _control._sort.AddData(new Product(lp, name, amount, price));
                 }
+                _control._sort.ConvertToStringList();
             }
             sql.CloseConn();
         }

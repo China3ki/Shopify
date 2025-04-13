@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
-/// To do ||| manualne sterowanie położeniem tablicy
 namespace Shopify.Components.Tables
 {
     class Table
@@ -36,8 +35,11 @@ namespace Shopify.Components.Tables
             {
                 if (rows[i].Length == MaxColumns) _rows.Add(rows[i]);
                 if (i == 9) break;
-            }   
+            }
         }
+        /// <summary>
+        /// Czyści tabele
+        /// </summary>
         public void ClearTable()
         {
             for (int x = 1; x < Console.WindowWidth - 2; x++)
@@ -53,12 +55,13 @@ namespace Shopify.Components.Tables
         /// <summary>
         /// Rysuje całkowicie tablice
         /// </summary>
-        public void WriteTable(int headerToColor)
+        public void WriteTable(int headerToColor, int rowToColorX)
         {
             int maxHeight = _rows.Count + _rows.Count + 1;
             List<string> table = [];
             for(int i = 0; i < maxHeight ; i++)
             {
+
                 if (i % 2 == 0 && i == 0) table.Add(PrintLines('╔', '╦', '╗', false));
                 else if (i % 2 == 1 && i != 0 && i != maxHeight - 1) 
                 {
@@ -72,7 +75,7 @@ namespace Shopify.Components.Tables
                 Console.SetCursorPosition(1, 1 + i);
                 Console.Write(table[i]);
             }
-            PrintData(headerToColor);
+            PrintData(headerToColor, rowToColorX);
         }
         /// <summary>
         /// Rysuje obramowanie do tablicy
@@ -107,7 +110,7 @@ namespace Shopify.Components.Tables
         /// <summary>
         /// Wypisuje dane w tablicy
         /// </summary>
-        private void PrintData(int headerToColor)
+        private void PrintData(int headerToColor, int rowToColorX)
         {
             int height = 2;
             for(int x = 0; x < _rows.Count; x++)
@@ -120,6 +123,7 @@ namespace Shopify.Components.Tables
                         Console.BackgroundColor = ConsoleColor.White;
                         Console.ForegroundColor = ConsoleColor.Black;
                     }
+                    if (x == rowToColorX && y == 0) Console.ForegroundColor = ConsoleColor.Green;
                     Console.SetCursorPosition(CenterTheWord(x, y), height);
                     Console.Write(_rows[x][y]);
                     Console.ResetColor();
@@ -137,11 +141,21 @@ namespace Shopify.Components.Tables
         {
             return (width - wordCount) / 2;
         }
+        /// <summary>
+        /// Centruję napis w kolumnie
+        /// </summary>
+        /// <param name="posX">Miejsce pola w rzędzie</param>
+        /// <param name="posY">Miejsce pola w kolumnie</param>
+        /// <returns></returns>
         public int CenterTheWord(int posX, int posY)
         {
             int[] width = CalculateTheLongestField();
             return 2 + width.Take(posY).Sum() + posY + Padding(width[posY], _rows[posX][posY].Length);
         }
+        /// <summary>
+        /// Wylicza długości najszerszych pól
+        /// </summary>
+        /// <returns>Długości najszerszych pól</returns>
         public int[] CalculateTheLongestField()
         {
             int[] width = new int[MaxColumns];
