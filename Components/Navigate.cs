@@ -7,12 +7,19 @@ using System.Threading.Tasks;
 
 namespace Shopify.Components
 {
-    class Navigate(List<String> menu)
+    class Navigate(List<string> menu)
     {
         public int Pos { get; set; } = 1;
-        public int MaxPos = menu.Count - 1;
-        private List<String> _menu = menu;
-        
+        private int _minPos = 1;
+        public int MaxPos { get; set; } = menu.Count - 1;
+        private List<string> _menu = menu;
+        public void ChangeSizeOfMenu(int minPos, List<string> menu)
+        {
+            Pos = minPos;
+            _minPos = minPos;
+            MaxPos = menu.Count - 1;
+            _menu = menu;
+        }
         /// <summary>
         /// Zmienia pozycję
         /// </summary>
@@ -24,14 +31,14 @@ namespace Shopify.Components
             switch(key)
             {
                 case ConsoleKey.UpArrow:
-                    Pos = Pos == 1 ? 1 : Pos -= 1;
+                    Pos = Pos == _minPos ? _minPos : Pos -= 1;
                     ChangeColor(Pos + 1, font, background);
                     break;
                 case ConsoleKey.DownArrow:
                     Pos = Pos == MaxPos ? MaxPos : Pos += 1;
-                    ChangeColor(Pos - 1, font, background);
-                    break;
-            }
+                    ChangeColor(Pos - 1,  font, background);
+                    break; 
+            }         
         }
         /// <summary>
         /// Zmienia kolor wcześnie i aktualnej wybranej pozycji

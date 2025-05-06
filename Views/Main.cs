@@ -13,7 +13,7 @@ namespace Shopify.Views
         {
             _frame.ClearFrame();
             _frame.RenderBorder();
-            _frame.RenderMenu(_menu, ConsoleColor.Green, ConsoleColor.Black);
+            _frame.RenderMenu(_menu, 1, ConsoleColor.Green, ConsoleColor.Black);
             _info.InfoMessage("Zapraszamy do obejrzenia oraz zakupu naszych produktów!", ConsoleColor.Yellow, ConsoleColor.Black);
             _info.InfoMessage("Witaj ", ConsoleColor.White, ConsoleColor.Black);
             Console.ForegroundColor = ConsoleColor.Cyan;
@@ -38,6 +38,8 @@ namespace Shopify.Views
             {
                 case 1:
                     return States.Categories;
+                case 2:
+                    return States.Cart;
                 default:
                     _error.InitView();
                     return States.Exit;

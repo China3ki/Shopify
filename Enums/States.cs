@@ -11,6 +11,8 @@
         Main,
         Categories,
         ProductsList,
+        ProductDetails,
+        Cart,
         Outro,
         Exit
     };

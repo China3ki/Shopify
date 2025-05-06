@@ -19,7 +19,7 @@ namespace Shopify.Views
         public States InitView()
         {
             _frame.RenderBorder();
-            _frame.RenderMenu(_menu, ConsoleColor.Black, ConsoleColor.White);
+            _frame.RenderMenu(_menu,1, ConsoleColor.Black, ConsoleColor.White);
             _info.InfoMessage("- Hasło musi mieć przynajmniej 8 znaków, jedną duża literę oraz jeden znak specjalny", ConsoleColor.Yellow, ConsoleColor.Black);
             _info.InfoMessage("- Nazwa użytkownia musi być unikalna i może mieć maksymalnie 30 znaków", ConsoleColor.Yellow, ConsoleColor.Black);
             _info.InfoMessage("Wymagania do rejestracji:", ConsoleColor.White, ConsoleColor.Black);

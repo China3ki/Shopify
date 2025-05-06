@@ -38,13 +38,13 @@ namespace Shopify.Components
         /// <param name="menu">Tablica zawierająca elementy menu</param>
         /// <param name="font">Kolor czcionki</param>
         /// <param name="background">Kolor tła</param>
-        public void RenderMenu(List<string> menu, ConsoleColor font, ConsoleColor background)
+        public void RenderMenu(List<string> menu, int startColor, ConsoleColor font, ConsoleColor background)
         {
             for(int i = 0; i < menu.Count; i++)
             {
                 Console.SetCursorPosition(2, i);
                 if (i == 0) Console.ForegroundColor = ConsoleColor.Cyan;
-                else if(i == 1)
+                else if(i == startColor)
                 {
                     Console.ForegroundColor = font;
                     Console.BackgroundColor = background;

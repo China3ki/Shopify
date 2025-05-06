@@ -9,15 +9,19 @@ using System.Threading.Tasks;
 
 namespace Shopify.Components.Sorting.ListType
 {
-    class Product(int lp, string name, int amount, decimal price) : ISort
+    class Product(int lp, string name, string manufacturer, int amount, decimal price, string desc = "") : ISort
     {
         public int Lp { get; } = lp;
         public string Name { get; } = name;
+        public string Desc { get; } = desc;
+        public string Manufacturer { get; } = manufacturer;
         public int Amount { get; } = amount;
         public decimal Price { get; } = price;
-        public string[] ConvertToStringArray()
+        public int AddedToCart { get; set; } = 1;
+        public string[] ConvertToStringArray(bool specificReturn)
         {
-            return [Lp.ToString(), Name.ToString(), Amount.ToString(), Price.ToString()];
+            if(specificReturn) return [Lp.ToString(), Manufacturer.ToString(), Name.ToString(), AddedToCart.ToString(), Price.ToString()];
+            else return [Lp.ToString(), Manufacturer.ToString(), Name.ToString(), Amount.ToString(), Price.ToString()];
         }
         public SortDataType GetVarType(int x)
         {
@@ -28,9 +32,15 @@ namespace Shopify.Components.Sorting.ListType
                 case 1:
                     return SortDataType.String;
                 case 2:
-                    return SortDataType.Int;
+                    return SortDataType.String;
                 case 3:
+                    return SortDataType.Int;
+                case 4:
                     return SortDataType.Decimal;
+                case 5:
+                    return SortDataType.Int;
+                case 6:
+                    return SortDataType.String;
                 default:
                     throw new NotImplementedException();
             }

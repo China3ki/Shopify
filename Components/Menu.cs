@@ -20,7 +20,7 @@ namespace Shopify.Components
             switch(currentMenu)
             {
                 case States.Intro:
-                    Intro intro = new Intro([
+                    Intro intro = new([
             "  ____  _                 _  __       ",
             " / ___|| |__   ___  _ __ (_)/ _|_   _ ",
             " \\___ \\| '_ \\ / _ \\| '_ \\| | |_| | | |",
@@ -31,15 +31,15 @@ namespace Shopify.Components
                     currentMenu = intro.InitView();
                     break;
                 case States.Start:
-                    Start start = new Start([" == Start == ", "Zaloguj się", "Zarejestruj się", "Wyjdź"]);
+                    Start start = new([" == Start == ", "Zaloguj się", "Zarejestruj się", "Wyjdź"]);
                     currentMenu = start.InitView();
                     break;
                 case States.Register:
-                    Register register = new Register([" == Rejestracja == ", "Nazwa użytkownika:", "Hasło:", "Powtórzone hasło:", "Pokaż/Schowaj hasła", "Zarejestruj się", "Powrót"]);
+                    Register register = new([" == Rejestracja == ", "Nazwa użytkownika:", "Hasło:", "Powtórzone hasło:", "Pokaż/Schowaj hasła", "Zarejestruj się", "Powrót"]);
                     currentMenu = register.InitView();
                     break;
                 case States.CompleteReg:
-                    CompleteRegistration completeReg = new CompleteRegistration([
+                    CompleteRegistration completeReg = new([
                 " __        ___ _                        _ ",
                 " \\ \\      / (_) |_ __ _ _ __ ___  _   _| |",
                 "  \\ \\ /\\ / /| | __/ _` | '_ ` _ \\| | | | |",
@@ -50,11 +50,11 @@ namespace Shopify.Components
                     currentMenu = completeReg.InitView();
                     break;
                 case States.Login:
-                    Login login = new Login([" == Login == ", "Nazwa użytkownika:", "Hasło:", "Pokaż/Schowaj hasło", "Zaloguj się", "Powrót"]);
+                    Login login = new([" == Login == ", "Nazwa użytkownika:", "Hasło:", "Pokaż/Schowaj hasło", "Zaloguj się", "Powrót"]);
                     currentMenu = login.InitView();
                     break;
                 case States.CompleteSig:
-                    CompleteSignIn completeSig = new CompleteSignIn([
+                    CompleteSignIn completeSig = new([
                         "  _____     _                                            ",
                         " |__  /__ _| | ___   __ _  _____      ____ _ _ __   ___  ",
                         "   / // _` | |/ _ \\ / _` |/ _ \\ \\ /\\ / / _` | '_ \\ / _ \\ ",
@@ -65,18 +65,25 @@ namespace Shopify.Components
                     currentMenu = completeSig.InitView();
                     break;
                 case States.Main:
-                    Main main = new Main([" == Panel główny == ", "Pokaż listę produktów", "Pokaż koszyk", "Twoje zamówienia", "Zmień dane do dostawy", "Wyloguj", "Wyjdź"]);
+                    Main main = new([" == Panel główny == ", "Pokaż listę produktów", "Pokaż koszyk", "Twoje zamówienia", "Zmień dane do dostawy", "Wyloguj", "Wyjdź"]);
                     currentMenu = main.InitView();
                     break;
                 case States.Categories:
-                    Categories categories = new Categories([" == Kategorie == "]);
+                    Categories categories = new([" == Kategorie == "]);
                     currentMenu = categories.InitView();
                     break;
                 case States.ProductsList:
-                    ProductsList productsList = new ProductsList([$" == {Categories.SelectedCategory} == "], Categories.SelectedCategory);
+                    ProductsList productsList = new([$" == {Categories.SelectedCategory} == "], Categories.SelectedCategory);
                     currentMenu = productsList.InitView();
                     break;
-
+                case States.ProductDetails:
+                    ProductDetails productDetails = new([""], ProductsList.ProductInfo);
+                    currentMenu = productDetails.InitView();
+                    break;
+                case States.Cart:
+                    CartMenu cart = new(["== Koszyk == "]);
+                    currentMenu = cart.InitView();
+                    break;
             }
         }
     }

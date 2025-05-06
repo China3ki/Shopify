@@ -19,7 +19,7 @@ namespace Shopify.Views
             _frame.ClearFrame();
             _frame.RenderBorder();
             AddCategoriesToMenu();
-            _frame.RenderMenu(_menu, ConsoleColor.Black, ConsoleColor.White);
+            _frame.RenderMenu(_menu, 1, ConsoleColor.Black, ConsoleColor.White);
             _info.InfoMessage("Wybierz jedną z kategorii.", ConsoleColor.Yellow, ConsoleColor.Black);
             _info.InfoBox();
             ReadKey();
@@ -41,7 +41,7 @@ namespace Shopify.Views
                     _menu.Add(data.GetString("category_name"));
                 }
                 _menu.Add("Menu główne");
-                _nav.MaxPos = _menu.Count - 1;
+                _nav.ChangeSizeOfMenu(1, _menu);
             }
             sql.CloseConn();
         }

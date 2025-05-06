@@ -11,7 +11,7 @@ namespace Shopify.Interfaces
 {
     interface ISort
     {
-        string[] ConvertToStringArray();
+        string[] ConvertToStringArray(bool specificReturn);
         SortDataType GetVarType(int x);
     }
 }

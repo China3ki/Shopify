@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Shopify.Components.Tables
 {
     class TableNavigate()
@@ -43,15 +44,14 @@ namespace Shopify.Components.Tables
             Height = 1 + 2 * MaxRows - 1;
             _tableCord[0] = MaxRows - 1;
         }
-        public void ChangeFirstColumnColor(int maxWidth, int prevHeight, string oldFieldName, string fieldName)
+        public void ChangeFirstColumnColor(int posX, int oldPosX ,int prevHeight, string oldFieldName, string fieldName)
         {
-            Console.SetCursorPosition(maxWidth, prevHeight);
+            Console.SetCursorPosition(oldPosX, prevHeight);
             Console.Write(oldFieldName);
             Console.ForegroundColor = ConsoleColor.Green;
-            Console.SetCursorPosition(maxWidth, Height);
+            Console.SetCursorPosition(posX, Height);
             Console.Write(fieldName);
             Console.ResetColor();
-
         }
     }
 }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Shopify.Etc;
 namespace Shopify.Components.Tables
 {
 
@@ -28,28 +29,31 @@ namespace Shopify.Components.Tables
             _sort.MaxPages = (_sort.ReturnRowsNum() / 10);
             _table.WriteTable(_tableNav._tableCord[1], _tableNav._tableCord[0]);
         }
-        /// <summary>
-        /// Dodaje elementy do listy
-        /// </summary>
-        /// <param name="lp">Lp</param>
-        /// <param name="name">Nazwa</param>
-        /// <param name="amount">Ilość</param>
-        /// <param name="price">Cena</param>
-
+        public void ClearTableData()
+        {
+            _table.ClearTable();
+            _sort.Page = 0;
+            _sort.ClearData();
+        }
         /// <summary>
         /// Sprawdza warunki oraz aktywuję odpowiednią funkcję
         /// </summary>
-        public void Control()
+        public void Control(ConsoleKey key)
         {
-            ConsoleKey key;
-            do
-            {
-                int rowNum = _tableNav._tableCord[0];
-                key = Console.ReadKey(true).Key;
-                if (key == ConsoleKey.RightArrow || key == ConsoleKey.LeftArrow) HandleSorting(key);
-                if ((key == ConsoleKey.UpArrow && rowNum != 1) || (key == ConsoleKey.DownArrow && rowNum != _tableNav.MaxRows - 1)) HandleRowColor(key);
-                if ((key == ConsoleKey.UpArrow && rowNum == 1 && _sort.Page != 0) || (key == ConsoleKey.DownArrow && rowNum == _tableNav.MaxRows - 1 && _sort.Page != _sort.MaxPages)) HandlePagination(key);
-            } while (key != ConsoleKey.Enter);
+            int rowNum = _tableNav._tableCord[0];
+            if (key == ConsoleKey.RightArrow || key == ConsoleKey.LeftArrow) HandleSorting(key);
+            if ((key == ConsoleKey.UpArrow && rowNum != 1) || (key == ConsoleKey.DownArrow && rowNum != _tableNav.MaxRows - 1)) HandleRowColor(key);
+            if ((key == ConsoleKey.UpArrow && rowNum == 1 && _sort.Page != 0) || (key == ConsoleKey.DownArrow && rowNum == _tableNav.MaxRows - 1 && _sort.Page != _sort.MaxPages)) HandlePagination(key);
+        }
+        public string GetProductName()
+        {
+            int x = _tableNav._tableCord[0] - 1;
+            return _sort._rows[x][2];
+        }
+        public int getProductId()
+        {
+            int x = _tableNav._tableCord[0] - 1;
+            return int.Parse(_sort._rows[x][0]);
         }
         /// <summary>
         /// Zmienia metodę sortowania
@@ -73,9 +77,10 @@ namespace Shopify.Components.Tables
         private void HandleRowColor(ConsoleKey key)
         {
             int rowNum = _tableNav._tableCord[0];
+            int colNum = _tableNav._tableCord[1];
             int oldHeight = _tableNav.Height;
             _tableNav.ChangePos(key);
-            _tableNav.ChangeFirstColumnColor(_table.CenterTheWord(1, 0), oldHeight, _table._rows[rowNum][0], _table._rows[_tableNav._tableCord[0]][0]);
+            _tableNav.ChangeFirstColumnColor(_table.CenterTheWord(_tableNav._tableCord[0], _tableNav._tableCord[1]), _table.CenterTheWord(rowNum, colNum) ,oldHeight, _table._rows[rowNum][0], _table._rows[_tableNav._tableCord[0]][0]);
         }
         /// <summary>
         /// Paginacja tabeli
@@ -88,15 +93,17 @@ namespace Shopify.Components.Tables
             {
                 case ConsoleKey.UpArrow:
                     _sort.Page--;
+                    _table.AddRows(_sort.Pagination());
+                    SetMaxValues();
                     _tableNav.SetLastRowNum();
                     break;
                 case ConsoleKey.DownArrow:
                     _sort.Page++;
+                    _table.AddRows(_sort.Pagination());
+                    SetMaxValues();
                     _tableNav.DefaultRowNum();
                     break;
             }
-            _table.AddRows(_sort.Pagination());
-            SetMaxValues();
             _table.WriteTable(_tableNav._tableCord[1], _tableNav._tableCord[0]);
         }     
         private void SetMaxValues()

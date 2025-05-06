@@ -14,7 +14,7 @@ namespace Shopify.Views
         {
             _frame.ClearFrame();
             _frame.RenderBorder();
-            _frame.RenderMenu(_menu, ConsoleColor.Green, ConsoleColor.Black);
+            _frame.RenderMenu(_menu, 1, ConsoleColor.Green, ConsoleColor.Black);
             _info.InfoMessage("Wybierz jedną z opcji aby kontynować.", ConsoleColor.Yellow, ConsoleColor.Black);
             _info.InfoMessage("Witaj w Shopify!", ConsoleColor.White, ConsoleColor.Black);
             _info.InfoBox();

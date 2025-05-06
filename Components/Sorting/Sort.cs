@@ -23,12 +23,16 @@ namespace Shopify.Components
         {
             _data.Add(data);
         }
-        public void ConvertToStringList()
+        public void ClearData()
+        {
+            _data = [];
+        }
+        public void ConvertToStringList(bool specificReturn)
         {
             List<string[]> rows = [];
             foreach(var data in _data)
             {
-                rows.Add(data.ConvertToStringArray());
+                rows.Add(data.ConvertToStringArray(specificReturn));
             }
             _rows = rows;
         }

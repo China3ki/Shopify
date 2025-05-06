@@ -20,7 +20,7 @@ namespace Shopify.Views
         {
             _frame.ClearFrame();
             _frame.RenderBorder();
-            _frame.RenderMenu(_menu, ConsoleColor.Black, ConsoleColor.White);
+            _frame.RenderMenu(_menu, 1, ConsoleColor.Black, ConsoleColor.White);
             _info.InfoMessage("Uzupełnij dane aby się zalogować.", ConsoleColor.Yellow, ConsoleColor.Black);
             _info.InfoBox();
             ReadKey();
